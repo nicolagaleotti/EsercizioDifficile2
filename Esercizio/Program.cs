@@ -12,14 +12,18 @@ namespace Esercizio
             string fileoutput = "output.txt";
             List<string> testo = new List<string>();
             bool spazio = false;
-            string yin = "";
-            string xfin = "";
+            string Yin = "";
+            string Xfin = "";
+            int yin = 0;
+            int xfin = 0;
             int N;
             bool spazio1 = false;
             bool spazio2 = false;
-            List<string> x = new List<string>();
-            List<string> y = new List<string>();
-            List<string> y1 = new List<string>();
+            List<int> x = new List<int>();
+            List<int> y = new List<int>();
+            List<int> y1 = new List<int>();
+            int xattuale = 0;
+
 
             using (StreamReader reader = new StreamReader(fileinput))
             {
@@ -41,13 +45,15 @@ namespace Esercizio
                 }
                 else if (spazio == false)
                 {
-                    yin += linea[c];
+                    Yin += linea[c];
                 }
                 else if (spazio == true)
                 {
-                    xfin += linea[c];
+                    Xfin += linea[c];
                 }
             }
+            yin = int.Parse(Yin);
+            xfin = int.Parse(Xfin);
 
             N = int.Parse(testo[1]);
 
@@ -88,10 +94,36 @@ namespace Esercizio
                         }
                     }
                 }
-                x.Add(X);
-                y.Add(Y);
-                y1.Add(Y1);
+                x.Add(int.Parse(X));
+                y.Add(int.Parse(Y));
+                y1.Add(int.Parse(Y1));
             }
+
+            int j = 0;
+            int lunghezza = xfin;
+            int yattuale = 0;
+            int y1attuale = 0;
+
+            do
+            {
+                if (xattuale == x[j])
+                {
+                    yattuale = y[j];
+                    y1attuale = y1[j];
+                    if (Math.Abs(yin - yattuale) < Math.Abs(yin - y1attuale))
+                    {
+                        lunghezza += Math.Abs(yin - yattuale);
+                        yin = yattuale;
+                    }
+                    else
+                    {
+                        lunghezza += Math.Abs(yin - y1attuale);
+                        yin = y1attuale;
+                    }
+                    j++;
+                }
+                xattuale++;
+            } while (xattuale < xfin);
 
             Console.WriteLine($"{yin} {xfin}");
             Console.WriteLine(N);
@@ -99,6 +131,7 @@ namespace Esercizio
             {
                 Console.WriteLine($"{x[i]} {y[i]} {y1[i]}");
             }
+            Console.WriteLine(lunghezza);
         }   
     }
 }
