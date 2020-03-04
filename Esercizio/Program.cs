@@ -34,8 +34,6 @@ namespace Esercizio
                 }
             }
 
-            using (StreamWriter writer = new StreamWriter(fileoutput)) { }
-
             string linea = testo[0];
             for (int c = 0; c < linea.Length; c++)
             {
@@ -103,27 +101,28 @@ namespace Esercizio
             int lunghezza = xfin;
             int yattuale = 0;
             int y1attuale = 0;
+            int yfin = yin;
 
             do
             {
-                if (xattuale == x[j])
+                if (xattuale == x[j] && yfin > y[j] && yfin < y1[j])
                 {
                     yattuale = y[j];
                     y1attuale = y1[j];
-                    if (Math.Abs(yin - yattuale) < Math.Abs(yin - y1attuale))
+                    if (Math.Abs(yfin - yattuale) < Math.Abs(yfin - y1attuale))
                     {
-                        lunghezza += Math.Abs(yin - yattuale);
-                        yin = yattuale;
+                        lunghezza += Math.Abs(yfin - yattuale);
+                        yfin = yattuale;
                     }
                     else
                     {
-                        lunghezza += Math.Abs(yin - y1attuale);
-                        yin = y1attuale;
+                        lunghezza += Math.Abs(yfin - y1attuale);
+                        yfin = y1attuale;
                     }
                     j++;
                 }
                 xattuale++;
-            } while (xattuale < xfin);
+            } while (xattuale < xfin && j < 5);
 
             Console.WriteLine($"{yin} {xfin}");
             Console.WriteLine(N);
@@ -131,7 +130,12 @@ namespace Esercizio
             {
                 Console.WriteLine($"{x[i]} {y[i]} {y1[i]}");
             }
-            Console.WriteLine(lunghezza);
+            Console.WriteLine($"{lunghezza} {yfin}");
+
+            using (StreamWriter writer = new StreamWriter(fileoutput)) 
+            {
+                writer.WriteLine($"{lunghezza} {yfin}");
+            }
         }   
     }
 }
