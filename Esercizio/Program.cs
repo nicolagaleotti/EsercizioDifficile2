@@ -87,10 +87,10 @@ namespace Esercizio
                             Y1 += linea[i];
                         }
                     }
-                    x.Add(X);
-                    y.Add(Y);
-                    y1.Add(Y1);
                 }
+                x.Add(X);
+                y.Add(Y);
+                y1.Add(Y1);
             }
 
             Console.WriteLine($"{yin} {xfin}");
