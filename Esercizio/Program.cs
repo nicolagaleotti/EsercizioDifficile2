@@ -105,6 +105,10 @@ namespace Esercizio
 
             do
             {
+                if (xattuale > x[j])
+                    {
+                        j++;
+                    }
                 if (xattuale == x[j] && yfin > y[j] && yfin < y1[j])
                 {
                     yattuale = y[j];
@@ -121,6 +125,7 @@ namespace Esercizio
                     }
                     j++;
                 }
+                
                 xattuale++;
             } while (xattuale < xfin && j < 5);
 
